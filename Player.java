@@ -1,8 +1,11 @@
 public class Player 
 {
-    //position variables
+    //position and size variables
     private double x;
     private double y;
+    private double size;
+
+    private final double textOffset = 5.0;
 
     //attributes
     private double speed;
@@ -14,22 +17,28 @@ public class Player
     private Ball[] balls = new Ball[1];
     private Text nameTag;
 
-
+    //functionality variables: hitbox
+    private Hitbox hitbox;
 
     //constructor
-    public Player(double x, double y, double speed, String name)
+    public Player(double x, double y, double speed, double size, String name)
     {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.name = name;
 
+
         //create new nametag
         this.nameTag = new Text(name, 20, x, y, "GREEN", 5);
 
         //create circles
-        Ball b = new Ball(x, y, 25, "GREEN");
+        Ball b = new Ball(x, y, size, "GREEN");
         balls[0] = b;
+
+        //create hitbox
+        hitbox = new Hitbox(size * 0.65, false, true);
+        hitbox.setPlayer(this);
     }
 
     //addTo function
@@ -63,7 +72,7 @@ public class Player
         }
 
         //move nametag
-        nameTag.setXPosition(x);
+        nameTag.setXPosition(x - (name.length() * textOffset));
         nameTag.setYPosition(y - 20);
     }
 
@@ -83,4 +92,12 @@ public class Player
         return speed;
     }
 
+    public void click(double mouseX, double mouseY)
+    {
+        boolean hasBeenClicked = hitbox.click(mouseX, mouseY);
+        if(hasBeenClicked)
+        {
+            System.out.println("\nPLAYER CLICKED!!!");
+        }
+    }
 }

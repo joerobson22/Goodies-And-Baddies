@@ -18,6 +18,8 @@ public class GameArena extends JPanel implements Runnable, KeyListener, MouseLis
 	private int arenaWidth;
 	private int arenaHeight;
 
+	private ObjectManager objectManager;
+
 	private boolean exiting = false;
 
 	private ArrayList<Object> things = new ArrayList<Object>();
@@ -589,6 +591,9 @@ public class GameArena extends JPanel implements Runnable, KeyListener, MouseLis
 
 	public void mouseClicked(MouseEvent e)
 	{
+		System.out.println("\nMOUSE CLICKED\n");
+		//make all enemies and powerup boxes identify if they have been clicked
+		objectManager.getPlayer().click(mouseX, mouseY);
 	}
 
 	public void mouseMoved(MouseEvent e)
@@ -729,4 +734,8 @@ public class GameArena extends JPanel implements Runnable, KeyListener, MouseLis
 		return mouseY;
 	}
 
+	public void setObjectManager(ObjectManager o)
+	{
+		objectManager = o;
+	}
 }
