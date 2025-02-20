@@ -40,16 +40,7 @@ public class Hitbox
         double yDistance = Math.abs(parentPlayer.getY() - mouseY);
         double overallDistance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 
-        System.out.printf("mouse x: %f\n", mouseX);
-        System.out.printf("mouse y: %f\n", mouseY);
-        System.out.printf("player x: %f\n", parentPlayer.getX());
-        System.out.printf("player y: %f\n", parentPlayer.getY());
-
-        System.out.printf("xDistance: %f\n", xDistance);
-        System.out.printf("yDistance: %f\n", yDistance);
-        System.out.printf("total Distance: %f\n", overallDistance);
-
-        return (overallDistance <= size);
+        return (canBeClicked && overallDistance <= size);
     }
 
     //accessors
