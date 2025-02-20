@@ -1,16 +1,16 @@
-j = java
-exe_name = Main
+.PHONY: all exec build buildpackage clean
 
-all: clear clean exec run
+all: exec
 
-exec:
-	$(j)c *.$(j)
+exec: build
+	java Driver
 
-run:
-	$(j) $(exe_name)
+build: buildpackage Main.java Player.java
+
+buildpackage: Ball.java Line.java Rectangle.java Text.java GameArena.java
+
+%.java:
+	javac $@
 
 clean:
 	rm *.class
-
-clear:
-	clear
