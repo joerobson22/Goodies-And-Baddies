@@ -5,7 +5,7 @@ all: exec
 exec: build
 	java Main
 
-build: buildpackage Main.class Player.class Hitbox.class
+build: buildpackage Main.class Player.class Hitbox.class Colour.class
 
 buildpackage: Ball.class Line.class Rectangle.class Text.class GameArena.class
 
