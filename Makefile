@@ -3,7 +3,7 @@
 all: exec
 
 exec: build
-	java Driver
+	java Main
 
 build: buildpackage Main.java Player.java
 
