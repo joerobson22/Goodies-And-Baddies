@@ -5,12 +5,12 @@ all: exec
 exec: build
 	java Main
 
-build: buildpackage Main.java Player.java Hitbox.java
+build: buildpackage Main.class Player.class Hitbox.class
 
-buildpackage: Ball.java Line.java Rectangle.java Text.java GameArena.java
+buildpackage: Ball.class Line.class Rectangle.class Text.class GameArena.class
 
-%.java:
-	javac $@
+%.class: %.java
+	javac $<
 
 clean:
 	rm *.class
