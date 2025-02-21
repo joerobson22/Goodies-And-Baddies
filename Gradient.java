@@ -1,6 +1,6 @@
 public class Gradient {
-  private final Colour start;
-  private final Colour end;
+  public final Colour start;
+  public final Colour end;
 
   private final int steps;
 
