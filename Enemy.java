@@ -73,4 +73,14 @@ public class Enemy {
   public boolean isDead() {
     return !isAlive();
   }
+
+  public void moveForward() {
+    if (!reachedEnd()) {
+      ball.setXPosition(ball.getXPosition() - speed);
+    }
+  }
+
+  public boolean reachedEnd() {
+    return ball.getXPosition() <= size;
+  }
 }
