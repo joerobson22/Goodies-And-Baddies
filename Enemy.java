@@ -7,23 +7,35 @@ public class Enemy {
   private final double speed;
   private final double size;
   private int health;
-  private final Colour colour;
+  private Gradient gradient;
   private final boolean isSplittable;
 
   private static Random random = new Random();
+
+  private static Gradient standardGradient = new Gradient(
+      new Colour(0, 253, 255),
+      new Colour(148, 33, 147),
+      255);
+
+  private static Gradient splittableGradient = new Gradient(
+      new Colour(0, 253, 255),
+      new Colour(0, 143, 0),
+      255);
+
+  private static Colour red = new Colour(255, 0, 0);
 
   private Enemy(int seed) {
     this.speed = (seed / 9);
     this.size = (seed / 6) + 15;
     this.health = (int) Math.ceil((seed + 1) / 20);
     this.isSplittable = (seed > 220) && (seed % 5 == 0);
+    Gradient baseGradient;
     if (this.isSplittable) {
-      // use the splittable gradient
-      this.colour = new Colour(0, (int) -(seed / 2.7) + 250, -seed + 255);
+      baseGradient = splittableGradient;
     } else {
-      // use the standard gradient
-      this.colour = new Colour((int) (seed / 1.7), (int) -(seed / 1.17) + 253, (int) -(seed / 2.4) + 255);
+      baseGradient = standardGradient;
     }
+    this.gradient = new Gradient(baseGradient.step(seed), red, health);
     // TODO: balls
   }
 
