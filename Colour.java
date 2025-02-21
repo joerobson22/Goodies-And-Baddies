@@ -16,12 +16,13 @@ public class Colour {
     this.r = r;
     this.g = g;
     this.b = b;
+    this.clamp();
   }
 
   /**
    * Clamp this Colour's rgb values to between 0 and 255.
    */
-  public void clamp() {
+  private void clamp() {
     this.r = Math.clamp(this.r, 0, 255);
     this.g = Math.clamp(this.g, 0, 255);
     this.b = Math.clamp(this.b, 0, 255);
@@ -29,10 +30,7 @@ public class Colour {
 
   @Override
   public String toString() {
-    this.clamp();
     int col = (this.r << 16) | (this.g << 8) | (this.b);
     return "#" + Integer.toHexString(col);
-    // return "##" + Integer.toHexString(r) + Integer.toHexString(g) +
-    // Integer.toHexString(b);
   }
 }
