@@ -9,6 +9,7 @@ public class Enemy {
   private int health;
   private Gradient gradient;
   private final boolean isSplittable;
+  private Ball ball;
 
   private static Random random = new Random();
 
@@ -35,8 +36,9 @@ public class Enemy {
     } else {
       baseGradient = standardGradient;
     }
-    this.gradient = new Gradient(baseGradient.step(seed), red, health);
-    // TODO: balls
+    this.gradient = new Gradient(red, baseGradient.step(seed), health);
+    int y_coord = random.nextInt(50, 750);
+    this.ball = new Ball(1000 + size, y_coord, size, gradient.end.toString());
   }
 
   /**
