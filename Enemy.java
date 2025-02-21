@@ -56,4 +56,21 @@ public class Enemy {
     int seed = random.nextInt(clampedMin, clampedMax);
     return new Enemy(seed);
   }
+
+  private void updateColour() {
+    ball.setColour(gradient.step(health).toString());
+  }
+
+  public void damage() {
+    health -= 1;
+    updateColour();
+  }
+
+  public boolean isAlive() {
+    return health > 0;
+  }
+
+  public boolean isDead() {
+    return !isAlive();
+  }
 }
