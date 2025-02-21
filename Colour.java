@@ -31,6 +31,40 @@ public class Colour {
   @Override
   public String toString() {
     int col = (this.r << 16) | (this.g << 8) | (this.b);
-    return "#" + Integer.toHexString(col);
+    String hex = Integer.toHexString(col);
+    if (hex.length() < 6) {
+      hex = ("0".repeat(6 - hex.length())) + hex;
+    }
+    return "#" + hex;
+  }
+
+  private static int scale_component(int component, double scalar) {
+    return (int) Math.round(component * scalar);
+  }
+
+  /**
+   * Multiply the rgb components of the colour by `scalar`.
+   * 
+   * @param scalar Multiplication factor. Probably between 0 and 1.
+   * @return The product of this colour and `scalar`.
+   */
+  public Colour scale(double scalar) {
+    return new Colour(
+        scale_component(this.r, scalar),
+        scale_component(this.g, scalar),
+        scale_component(this.b, scalar));
+  }
+
+  /**
+   * Add the rgb components of this colour to `other`.
+   * 
+   * @param other The other colour to add.
+   * @return The sum of the two colours.
+   */
+  public Colour add(Colour other) {
+    return new Colour(
+        this.r + other.r,
+        this.g + other.g,
+        this.b + other.b);
   }
 }
