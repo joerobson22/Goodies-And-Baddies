@@ -7,9 +7,11 @@ public class Enemy {
   private final double speed;
   private final double size;
   private int health;
+  private boolean newlyDead;
   private Gradient gradient;
   private final boolean isSplittable;
   private Ball ball;
+  private Hitbox hitbox;
 
   private static Random random = new Random();
 
@@ -26,7 +28,7 @@ public class Enemy {
   private static Colour red = new Colour(255, 0, 0);
 
   private Enemy(int seed) {
-    this.speed = (seed / 9);
+    this.speed = (seed / 18);
     this.size = (seed / 6) + 15;
     this.health = (int) Math.ceil((seed + 1) / 20);
     this.isSplittable = (seed > 220) && (seed % 5 == 0);
@@ -39,6 +41,9 @@ public class Enemy {
     this.gradient = new Gradient(red, baseGradient.step(seed), health);
     int y_coord = random.nextInt(50, 750);
     this.ball = new Ball(1000 + size, y_coord, size, gradient.end.toString());
+    hitbox = new Hitbox(size, true, false);
+    hitbox.setEnemy(this);
+    newlyDead = false;
   }
 
   /**
@@ -51,8 +56,8 @@ public class Enemy {
    * @return The generated Enemy.
    */
   public static Enemy random(int min, int max) {
-    int clampedMin = Math.clamp(min, 0, 255);
-    int clampedMax = Math.clamp(max, 0, 255);
+    int clampedMin = Math.max(0, Math.min(min, 255));
+    int clampedMax = Math.max(0, Math.min(max, 255));
     int seed = random.nextInt(clampedMin, clampedMax);
     return new Enemy(seed);
   }
@@ -75,7 +80,7 @@ public class Enemy {
   }
 
   public void moveForward() {
-    if (!reachedEnd()) {
+    if (!reachedEnd() && isAlive()) {
       ball.setXPosition(ball.getXPosition() - speed);
     }
   }
@@ -83,4 +88,37 @@ public class Enemy {
   public boolean reachedEnd() {
     return ball.getXPosition() <= size;
   }
+
+  public void addTo(GameArena arena)
+  {
+    arena.addBall(ball);
+  }
+
+  public Ball getBall()
+  {
+    return ball;
+  }
+  
+  public Hitbox getHitbox()
+  {
+    return hitbox;
+  }
+
+  public boolean isNewlyDead()
+  {
+    if(newlyDead)
+    {
+      newlyDead = false;
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  public void setNewlyDead()
+  {
+    newlyDead = true;
+  } 
 }

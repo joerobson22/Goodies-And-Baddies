@@ -115,6 +115,7 @@ public class Player
         return damage;
     }
 
+    /*
     public void click(double mouseX, double mouseY)
     {
         boolean hasBeenClicked = hitbox.click(mouseX, mouseY);
@@ -123,4 +124,5 @@ public class Player
             System.out.println("\nPLAYER CLICKED!!!");
         }
     }
+    */
 }

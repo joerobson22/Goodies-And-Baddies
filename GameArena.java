@@ -592,7 +592,7 @@ public class GameArena extends JPanel implements Runnable, KeyListener, MouseLis
 	public void mouseClicked(MouseEvent e)
 	{
 		//make all enemies and powerup boxes identify if they have been clicked
-		objectManager.getPlayer().click(mouseX, mouseY);
+		objectManager.click(mouseX, mouseY);
 	}
 
 	public void mouseMoved(MouseEvent e)

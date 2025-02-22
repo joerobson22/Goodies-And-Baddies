@@ -23,10 +23,11 @@ public class Colour {
    * Clamp this Colour's rgb values to between 0 and 255.
    */
   private void clamp() {
-    this.r = Math.clamp(this.r, 0, 255);
-    this.g = Math.clamp(this.g, 0, 255);
-    this.b = Math.clamp(this.b, 0, 255);
+    this.r = Math.max(0, Math.min(this.r, 255));
+    this.g = Math.max(0, Math.min(this.g, 255));
+    this.b = Math.max(0, Math.min(this.b, 255));
   }
+
 
   @Override
   public String toString() {

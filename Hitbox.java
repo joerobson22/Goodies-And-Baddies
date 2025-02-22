@@ -8,7 +8,7 @@ public class Hitbox
 
     //allows hitbox to send messages via calling methods on its parent nodes
     Player parentPlayer = null;
-    //Enemy parentEnemy = null; once the enemy class has been created
+    Enemy parentEnemy = null;
 
     //constructor
     public Hitbox(double size, boolean canBeClicked, boolean canCollide)
@@ -25,22 +25,39 @@ public class Hitbox
     }
 
     //set parent enemy method
-    /*
     public void setEnemy(Enemy enemy)
     {
         this.parentEnemy = enemy;
     }
-    */
 
     //click detection method
-    public boolean click(double mouseX, double mouseY)
+    public void clickEnemy(double mouseX, double mouseY)
     {
-        //calculate distance from centre of player to the mouse, if less than or equal, then player has been clicked
-        double xDistance = Math.abs(parentPlayer.getX() - mouseX);
-        double yDistance = Math.abs(parentPlayer.getY() - mouseY);
-        double overallDistance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+        if(parentEnemy.isAlive())
+        {
+            System.out.printf("CLICK AND ALIVE\n");
+            //calculate distance from centre of enemy to the mouse, if less than or equal, then player has been clicked
+            double xDistance = Math.abs(parentEnemy.getBall().getXPosition() - mouseX);
+            double yDistance = Math.abs(parentEnemy.getBall().getYPosition() - mouseY);
+            double overallDistance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+            
+            System.out.printf("xDistance: %f\n", xDistance);
+            System.out.printf("yDistance: %f\n", yDistance);
+            System.out.printf("overall Distance: %f\n", overallDistance);
+            System.out.printf("size: %f\n", size);
 
-        return (canBeClicked && overallDistance <= size);
+            //if within hitbox, damage
+            if(overallDistance <= size)
+            {
+                parentEnemy.damage();
+            }
+            //if parent is now dead
+            if(parentEnemy.isDead())
+            {
+                parentEnemy.setNewlyDead();
+            }
+        }
+        
     }
 
     //accessors
