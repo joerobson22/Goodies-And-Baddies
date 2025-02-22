@@ -24,7 +24,7 @@ public class Gradient {
    * @return The colour at that distance.
    */
   public Colour interpolate(double distance) {
-    return start.scale(distance).add(end.scale(1.0 - distance));
+    return start.scale(1.0 - distance).add(end.scale(distance));
   }
 
   /**
