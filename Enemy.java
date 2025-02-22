@@ -28,7 +28,7 @@ public class Enemy {
   private static Colour red = new Colour(255, 0, 0);
 
   private Enemy(int seed) {
-    this.speed = (seed / 18);
+    this.speed = ((255 - seed) / 35);
     this.size = (seed / 6) + 15;
     this.health = (int) Math.ceil((seed + 1) / 20);
     this.isSplittable = (seed > 220) && (seed % 5 == 0);
@@ -68,6 +68,7 @@ public class Enemy {
 
   public void damage() {
     health -= 1;
+    System.out.println(health);
     updateColour();
   }
 
@@ -89,36 +90,28 @@ public class Enemy {
     return ball.getXPosition() <= size;
   }
 
-  public void addTo(GameArena arena)
-  {
+  public void addTo(GameArena arena) {
     arena.addBall(ball);
   }
 
-  public Ball getBall()
-  {
+  public Ball getBall() {
     return ball;
   }
-  
-  public Hitbox getHitbox()
-  {
+
+  public Hitbox getHitbox() {
     return hitbox;
   }
 
-  public boolean isNewlyDead()
-  {
-    if(newlyDead)
-    {
+  public boolean isNewlyDead() {
+    if (newlyDead) {
       newlyDead = false;
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
   }
 
-  public void setNewlyDead()
-  {
+  public void setNewlyDead() {
     newlyDead = true;
-  } 
+  }
 }
