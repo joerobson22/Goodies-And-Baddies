@@ -41,7 +41,7 @@ public class Enemy {
     this.gradient = new Gradient(red, baseGradient.step(seed), health);
     int y_coord = random.nextInt(50, 750);
     this.ball = new Ball(1000 + size, y_coord, size, gradient.end.toString());
-    hitbox = new Hitbox(size, true, false);
+    hitbox = new Hitbox(size + 50, true, false);
     hitbox.setEnemy(this);
     newlyDead = false;
   }
